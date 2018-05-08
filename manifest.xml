@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://www.we7.cc" versionCode="0.8,1.0">
+	<application setting="false">
+		<name><![CDATA[炫酷微砍价]]></name>
+		<identifie><![CDATA[sanlian_xkwkj]]></identifie>
+		<version><![CDATA[2.5.6]]></version>
+		<type><![CDATA[activity]]></type>
+		<ability><![CDATA[炫酷微砍价，砍砍！！！！！]]></ability>
+		<description><![CDATA[炫酷微砍价，砍砍！！！！！！]]></description>
+		<author><![CDATA[淘宝超人源码]]></author>
+		<url><![CDATA[https://www.we7.cc]]></url>
+	</application>
+	<platform>
+		<subscribes>
+			<message type="qr" />
+		</subscribes>
+		<handles>
+			<message type="text" />
+			<message type="qr" />
+		</handles>
+		<rule embed="true" />
+		<card embed="false" />
+	</platform>
+	<bindings>
+		<cover>
+			<entry title="封面配置" do="homeIndex" state="" direct="false" />
+			<entry title="个人中心" do="ucenter" state="" direct="false" />
+		</cover>
+		<menu>
+			<entry title="全局配置" do="xkkjSetting" state="" direct="false" />
+			<entry title="注册用户" do="registers" state="" direct="false" />
+			<entry title="活动管理" do="xkkjManage" state="" direct="false" />
+			<entry title="商品管理" do="goodsManage" state="" direct="false" />
+			<entry title="全局配置" do="indexSetting" state="" direct="false" />
+			<entry title="首页配置" do="indexSetting" state="" direct="false" />
+			<entry title="类别管理" do="categorySetting" state="" direct="false" />
+			<entry title="模板管理" do="templateManage" state="" direct="false" />
+		</menu>
+	</bindings>
+	<permissions>
+	</permissions>
+	<install><![CDATA[CREATE TABLE IF NOT EXISTS `ims_sanlian_xkwkj` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `rid` int(10) NOT NULL,
+  `weid` int(11) NOT NULL,
+  `title` varchar(200) NOT NULL,
+  `starttime` int(10) DEFAULT NULL,
+  `endtime` int(10) DEFAULT NULL,
+  `kj_intro` text,
+  `p_kc` int(10) DEFAULT '0',
+  `p_y_price` float(10,2) DEFAULT NULL,
+  `p_low_price` float(10,2) DEFAULT NULL,
+  `yf_price` float(10,2) DEFAULT '0.00',
+  `copyright` varchar(100) NOT NULL,
+  `share_title` varchar(200) DEFAULT NULL,
+  `share_icon` varchar(200) DEFAULT NULL,
+  `share_content` varchar(200) DEFAULT NULL,
+  `copyright_url` varchar(500) DEFAULT NULL,
+  `hot_tel` varchar(50) DEFAULT NULL,
+  `createtime` int(10) DEFAULT '0',
+  `kj_dialog_tip` varchar(1000) DEFAULT NULL,
+  `rank_tip` varchar(1000) DEFAULT NULL,
+  `u_fist_tip` varchar(1000) DEFAULT NULL,
+  `u_already_tip` varchar(1000) DEFAULT NULL,
+  `fk_fist_tip` varchar(1000) DEFAULT NULL,
+  `fk_already_tip` varchar(1000) DEFAULT NULL,
+  `kj_rule` text,
+  `pay_type` int(2) DEFAULT NULL,
+  `p_model` varchar(1000) DEFAULT NULL,
+  `kj_follow_enable` int(1) DEFAULT NULL,
+  `join_follow_enable` int(1) DEFAULT NULL,
+  `follow_dlg_tip` varchar(500) DEFAULT NULL,
+  `follow_btn_name` varchar(20) DEFAULT NULL,
+  `share_bg` varchar(300) DEFAULT NULL,
+  `rank_num` int(10) DEFAULT NULL,
+  `join_rank_num` int(10) DEFAULT NULL,
+  `v_user` int(10) DEFAULT NULL,
+  `zt_address` varchar(1000) DEFAULT NULL,
+  `one_kj_enable` int(1) DEFAULT NULL,
+  `day_help_count` int(10) DEFAULT NULL,
+  `submit_money_limit` float(10,2) DEFAULT NULL,
+  `hx_enabled` int(1) DEFAULT NULL,
+  `show_index_enable` int(1) DEFAULT NULL,
+  `index_sort` int(10) DEFAULT NULL,
+  `announcement` varchar(2000) DEFAULT NULL,
+  `zgg_url` varchar(500) DEFAULT NULL,
+  `join_user_limit` int(10) DEFAULT NULL,
+  `help_limit` int(10) DEFAULT NULL,
+  `locationlimit` varchar(1000) DEFAULT NULL,
+  `bgmusic` varchar(500) DEFAULT NULL,
+  `erweim` varchar(300) DEFAULT NULL,
+  `kc_type` int(1) DEFAULT NULL,
+  `lq_type` int(1) DEFAULT NULL,
+  `cid` int(5) DEFAULT NULL,
+  `shtel` varchar(20) DEFAULT NULL,
+  `gid` varchar(10) DEFAULT NULL,
+  `templateid` int(10) DEFAULT NULL,
+  `hfbk_enable` int(1) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+CREATE TABLE IF NOT EXISTS `ims_sanlian_xkwkj_address` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `weid` int(10) DEFAULT NULL,
+  `openid` varchar(100) NOT NULL,
+  `unid` int(10) DEFAULT NULL,
+  `is_default` int(1) DEFAULT NULL,
+  `uname` varchar(50) DEFAULT NULL,
+  `tel` varchar(15) DEFAULT NULL,
+  `province` varchar(50) DEFAULT NULL,
+  `city` varchar(50) DEFAULT NULL,
+  `county` varchar(50) DEFAULT NULL,
+  `address` varchar(200) DEFAULT NULL,
+  `createtime` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `openid` (`openid`,`unid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+CREATE TABLE IF NOT EXISTS `ims_sanlian_xkwkj_category` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `typname` varchar(50) DEFAULT NULL,
+  `weid` int(10) DEFAULT NULL,
+  `icon_type` int(1) DEFAULT NULL,
+  `systypeicon` varchar(500) DEFAULT NULL,
+  `typeicon` varchar(500) DEFAULT NULL,
+  `display_sort` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `weid` (`weid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+CREATE TABLE IF NOT EXISTS `ims_sanlian_xkwkj_firend` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `kid` int(10) NOT NULL,
+  `uid` int(10) NOT NULL,
+  `openid` varchar(200) NOT NULL,
+  `nickname` varchar(100) NOT NULL,
+  `kd` int(2) DEFAULT NULL,
+  `kname` int(3) DEFAULT NULL,
+  `msg` varchar(500) DEFAULT NULL,
+  `ac` varchar(50) DEFAULT NULL,
+  `headimgurl` varchar(200) NOT NULL,
+  `k_price` float(10,2) DEFAULT NULL,
+  `kh_price` float(10,2) DEFAULT NULL,
+  `createtime` int(10) DEFAULT '0',
+  `ip` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_kid` (`kid`),
+  KEY `index_uid` (`uid`)
+) ENGINE=MyISAM AUTO_INCREMENT=522 DEFAULT CHARSET=utf8;
+CREATE TABLE IF NOT EXISTS `ims_sanlian_xkwkj_goods` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `weid` int(10) DEFAULT NULL,
+  `p_name` varchar(100) DEFAULT NULL,
+  `p_pic` varchar(300) DEFAULT NULL,
+  `p_preview_pic` varchar(300) DEFAULT NULL,
+  `p_url` varchar(500) DEFAULT NULL,
+  `createtime` int(10) DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `weid` (`weid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+CREATE TABLE IF NOT EXISTS `ims_sanlian_xkwkj_index_setting` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `weid` int(10) NOT NULL,
+  `pagesize` varchar(200) DEFAULT NULL,
+  `announcement` varchar(2000) DEFAULT NULL,
+  `banner_bg` varchar(1000) DEFAULT NULL,
+  `banner_url` varchar(2000) DEFAULT NULL,
+  `createtime` int(10) DEFAULT '0',
+  `share_title` varchar(200) DEFAULT NULL,
+  `share_icon` varchar(200) DEFAULT NULL,
+  `share_content` varchar(200) DEFAULT NULL,
+  `ppt_enable` int(1) DEFAULT NULL,
+  `category_enable` int(1) DEFAULT NULL,
+  `home_style` int(1) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+CREATE TABLE IF NOT EXISTS `ims_sanlian_xkwkj_order` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `kid` int(10) NOT NULL,
+  `uid` int(10) NOT NULL,
+  `uname` varchar(100) DEFAULT NULL,
+  `address` varchar(100) DEFAULT NULL,
+  `privnce` varchar(100) DEFAULT NULL,
+  `city` varchar(100) DEFAULT NULL,
+  `town` varchar(100) DEFAULT NULL,
+  `tel` varchar(50) DEFAULT NULL,
+  `zipcode` varchar(100) DEFAULT NULL,
+  `openid` varchar(200) DEFAULT NULL,
+  `outno` varchar(200) DEFAULT NULL,
+  `order_no` varchar(100) DEFAULT NULL,
+  `wxorder_no` varchar(100) DEFAULT NULL,
+  `y_price` float(10,2) DEFAULT NULL,
+  `kh_price` float(10,2) DEFAULT NULL,
+  `yf_price` float(10,2) DEFAULT NULL,
+  `total_price` float(10,2) DEFAULT NULL,
+  `pay_type` int(2) DEFAULT NULL,
+  `p_model` varchar(1000) DEFAULT NULL,
+  `status` int(1) DEFAULT NULL,
+  `wxnotify` varchar(200) DEFAULT NULL,
+  `notifytime` int(10) DEFAULT '0',
+  `createtime` int(10) DEFAULT '0',
+  `unid` int(10) DEFAULT NULL,
+  `remark` varchar(500) DEFAULT NULL,
+  `lq_type` int(2) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+CREATE TABLE IF NOT EXISTS `ims_sanlian_xkwkj_ppts` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `p_type` int(1) DEFAULT NULL,
+  `kid` int(10) DEFAULT NULL,
+  `weid` int(10) DEFAULT NULL,
+  `pptname` varchar(100) DEFAULT NULL,
+  `dsort` int(10) DEFAULT NULL,
+  `images` varchar(500) DEFAULT NULL,
+  `ppt_url` varchar(500) DEFAULT NULL,
+  `createtime` int(10) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+CREATE TABLE IF NOT EXISTS `ims_sanlian_xkwkj_reply` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `rid` int(50) DEFAULT NULL,
+  `kid` int(10) DEFAULT NULL,
+  `new_title` varchar(200) DEFAULT NULL,
+  `new_icon` varchar(200) DEFAULT NULL,
+  `new_content` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+CREATE TABLE IF NOT EXISTS `ims_sanlian_xkwkj_setting` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `weid` int(10) NOT NULL,
+  `appid` varchar(200) DEFAULT NULL,
+  `appsecret` varchar(200) DEFAULT NULL,
+  `mchid` varchar(100) DEFAULT NULL,
+  `shkey` varchar(100) DEFAULT NULL,
+  `createtime` int(10) DEFAULT '0',
+  `is_collect_user_info` int(1) DEFAULT NULL,
+  `help_kj_limit` int(10) DEFAULT NULL,
+  `tmp_enable` int(1) DEFAULT NULL,
+  `tmpId` varchar(500) DEFAULT NULL,
+  `fh_tmp_enable` int(1) DEFAULT NULL,
+  `fh_tmp_id` varchar(500) DEFAULT NULL,
+  `kf` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+CREATE TABLE IF NOT EXISTS `ims_sanlian_xkwkj_template` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `templatename` varchar(100) DEFAULT NULL,
+  `preview_pic` varchar(300) DEFAULT NULL,
+  `dirname` varchar(50) DEFAULT NULL,
+  `tempalte_type` int(4) DEFAULT NULL,
+  `createtime` int(10) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+CREATE TABLE IF NOT EXISTS `ims_sanlian_xkwkj_user` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `kid` int(10) NOT NULL,
+  `openid` varchar(200) NOT NULL,
+  `kd` int(2) DEFAULT NULL,
+  `nickname` varchar(100) NOT NULL,
+  `headimgurl` varchar(200) NOT NULL,
+  `price` float(10,2) DEFAULT NULL,
+  `ip` varchar(30) DEFAULT NULL,
+  `createtime` int(10) DEFAULT '0',
+  `unid` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_kid` (`kid`),
+  KEY `index_openid` (`openid`)
+) ENGINE=MyISAM AUTO_INCREMENT=95 DEFAULT CHARSET=utf8;
+CREATE TABLE IF NOT EXISTS `ims_sanlian_xkwkj_user_info` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `weid` int(10) NOT NULL,
+  `nickname` varchar(100) NOT NULL,
+  `openid` varchar(200) NOT NULL,
+  `headimgurl` varchar(200) NOT NULL,
+  `uname` varchar(100) DEFAULT NULL,
+  `tel` varchar(100) DEFAULT NULL,
+  `createtime` int(10) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+]]></install>
+	<uninstall><![CDATA[DROP TABLE IF EXISTS `ims_sanlian_xkwkj`;
+DROP TABLE IF EXISTS `ims_sanlian_xkwkj_address`;
+DROP TABLE IF EXISTS `ims_sanlian_xkwkj_category`;
+DROP TABLE IF EXISTS `ims_sanlian_xkwkj_firend`;
+DROP TABLE IF EXISTS `ims_sanlian_xkwkj_goods`;
+DROP TABLE IF EXISTS `ims_sanlian_xkwkj_index_setting`;
+DROP TABLE IF EXISTS `ims_sanlian_xkwkj_order`;
+DROP TABLE IF EXISTS `ims_sanlian_xkwkj_ppts`;
+DROP TABLE IF EXISTS `ims_sanlian_xkwkj_reply`;
+DROP TABLE IF EXISTS `ims_sanlian_xkwkj_setting`;
+DROP TABLE IF EXISTS `ims_sanlian_xkwkj_template`;
+DROP TABLE IF EXISTS `ims_sanlian_xkwkj_user`;
+DROP TABLE IF EXISTS `ims_sanlian_xkwkj_user_info`;
+]]></uninstall>
+	<upgrade><![CDATA[]]></upgrade>
+</manifest>
