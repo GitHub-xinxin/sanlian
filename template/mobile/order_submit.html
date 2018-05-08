@@ -105,13 +105,11 @@
                     <input id="tel" name="tel" value="" placeholder="填写手机号" type="text">
                     <span style="color:red;font-size:0.7em">*请认真选择取货门店，一旦提交无法更改，奖品将只能在所选门店领取.</span>
                     <select name="shop" id="">
-                        <option value="东风店">东风店</option>
-                        <option value="新华店">新华店</option>
-                        <option value="诸城店">诸城店</option>
-                        <option value="高密店">高密店</option>
-                        <option value="临朐店">临朐店</option>
-                        <option value="安丘店">安丘店</option>
-                        <option value="青州店">青州店</option>
+                        {loop $all_shop_list $row}
+                            {if in_array($row['id'],$select_shop_list)}
+                                <option value="{$row['shop_name']}">{$row['shop_name']}</option>
+                            {/if}
+                        {/loop}
                     </select>
                 {/if}
                 

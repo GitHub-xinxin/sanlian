@@ -15,6 +15,9 @@ $addid = $_GPC['addid'];
 $xkwkj = DBUtil::findById(DBUtil::$TABLE_XKWKJ, $kid);
 $goods = DBUtil::findById(DBUtil::$TABLE_XKWKJ_GOODS, $xkwkj['gid']);
 
+$select_shop_list = json_decode($xkwkj['shop_list'],true);
+$all_shop_list = pdo_getall('sanlian_xkwkj_shop_manage',array('uniacid'=>$_W['uniacid']));
+
 if ($xkwkj['lq_type'] ==self::LQ_TYPE_KD ) {
 	$lq_type = self::LQ_TYPE_KD;
 } else if ($xkwkj['lq_type'] ==self::LQ_TYPE_ZT) {

@@ -3,7 +3,7 @@
 	<application setting="false">
 		<name><![CDATA[炫酷微砍价]]></name>
 		<identifie><![CDATA[sanlian_xkwkj]]></identifie>
-		<version><![CDATA[2.5.6]]></version>
+		<version><![CDATA[2.5.7]]></version>
 		<type><![CDATA[activity]]></type>
 		<ability><![CDATA[炫酷微砍价，砍砍！！！！！]]></ability>
 		<description><![CDATA[炫酷微砍价，砍砍！！！！！！]]></description>
@@ -35,6 +35,7 @@
 			<entry title="首页配置" do="indexSetting" state="" direct="false" />
 			<entry title="类别管理" do="categorySetting" state="" direct="false" />
 			<entry title="模板管理" do="templateManage" state="" direct="false" />
+      <entry title="门店管理" do="ShopManage" state="" direct="false" />
 		</menu>
 	</bindings>
 	<permissions>

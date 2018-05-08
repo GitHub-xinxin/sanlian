@@ -16,6 +16,7 @@ if (!empty($kid)) {
 	$reply['starttime'] = date("Y-m-d  H:i", $reply['starttime']);
 	$reply['endtime'] = date("Y-m-d  H:i", $reply['endtime']);
 	$rule_items = unserialize($reply['kj_rule']);
+	$select_shop_list = json_decode($reply['shop_list'],true);
 }
 
 $categoryies = pdo_fetchall("SELECT * FROM " . tablename(DBUtil::$TABLE_XKWKJ_CATEGORY) . " WHERE weid =:weid  ORDER BY display_sort asc ", array(':weid' => $this->weid));
@@ -104,9 +105,16 @@ if (checksubmit('submit')) {
 		'cid' => $_GPC['cid'],
 		'shtel' => $_GPC['shtel'],
 		'templateid' => $_GPC['templateid'],
-		'hfbk_enable' => $_GPC['hfbk_enable']
+		'hfbk_enable' => $_GPC['hfbk_enable'],
+		'select_shop'=> $_GPC['select_shop']
 	);
-
+	if($data['select_shop'] == 1){
+		if(!empty($_GPC['shoplist'])){
+			$data['shop_list'] =json_encode($_GPC['shoplist']);
+		}
+	}else{
+		$data['shop_list']='';
+	}
 	if (empty($kid)) {
 		DBUtil::create(DBUtil::$TABLE_XKWKJ, $data);
 		message('添加砍价活动成功！', $this->createWebUrl('xkkjManage', array(
@@ -120,5 +128,5 @@ if (checksubmit('submit')) {
 	}
 }
 
-
+$shoplist = pdo_getall('sanlian_xkwkj_shop_manage',array('uniacid'=>$_W['uniacid']));
 include $this->template("kj_edit");

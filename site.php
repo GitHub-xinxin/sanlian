@@ -258,7 +258,13 @@ class Sanlian_XKWkjModuleSite extends Core {
 
 		include_once  'core/app/'.strtolower(substr($f_name,8)).'.php';
 	}
-
+	/**
+	 * 新增 门店管理
+	 */
+	public function  doWebShopManage()
+	{
+		$this->__web(__FUNCTION__);
+	}
 	/************************************************手机*********************************/
 	/**
 	 * author: codeMonkey QQ:2463619823
